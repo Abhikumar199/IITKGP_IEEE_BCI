@@ -1,83 +1,68 @@
-# From Spikes to Decisions: P300 Evidence Accumulation with Adaptive SNNs and Drift Diffusion Dynamics
+# P300 BCI: Spiking Neural Networks and Drift Diffusion Modeling
 
-A research implementation for analyzing P300-based brain–computer interface (BCI) signals using an Adaptive-Leaky Integrate-and-Fire (Adaptive-LIF) spiking neural network (SNN) and a discrete-time drift-diffusion model (DDM).
+This project explores P300-based brain–computer interface (BCI) decoding using an Adaptive Leaky Integrate-and-Fire (Adaptive-LIF) spiking neural network (SNN). It investigates how time-resolved neural evidence can be calibrated, accumulated across repeated stimulus presentations, and described using a drift-diffusion model (DDM).
 
-The project goes beyond static target/non-target classification: it studies whether a spiking model can produce a temporally resolved neural-evidence trajectory, calibrate this evidence into approximate log-likelihood-ratio (LLR) increments, and accumulate evidence across repeated presentations in a P300 speller task.
+**Status:** Research prototype. The current SNN performs below the LDA baseline, and the DDM results are preliminary.
 
-> **Status:** Research prototype / technical report (October 2026). The reported SNN results do **not** outperform the matched LDA baseline. The DDM estimates in the current report are preliminary and need to be recomputed after restricting the DDM table to held-out test epochs only.
+## Pipeline
 
-## Overview
+P300 EEG → Adaptive-LIF SNN → temporal evidence → evidence calibration → accumulation across repetitions → DDM
 
-**Pipeline**
+The current analysis uses seven sessions from participant SBJ01 in the BCIAUT-P300 dataset, evaluated with leave-one-session-out validation.
 
-`P300 EEG → Adaptive-LIF SNN → temporal evidence E(t) → calibrated LLR → repetition-wise accumulation → DDM`
+## Dataset and preprocessing
 
-The implementation uses the BCIAUT-P300 dataset and, in the current report, evaluates seven sessions from participant SBJ01 with leave-one-session-out validation.
+- Dataset: BCIAUT-P300
+- Participant: SBJ01
+- Sessions: 7
+- EEG channels: 8
+- Sampling rate: 250 Hz
+- Band-pass filter: fourth-order, zero-phase Butterworth, 0.5–20 Hz
+- Baseline interval: −200 to 0 ms
+- Post-stimulus window: 0–800 ms
+- Temporal pooling: 4 samples per SNN time step
+- SNN input: samples × 50 time steps × 8 channels
 
-## Research Questions
+The pre-stimulus leakage check reports an LDA AUC of 0.509 ± 0.016, close to chance.
 
-- Can an Adaptive-LIF SNN distinguish target and non-target P300 EEG responses when an entire session is held out?
-- Does the model provide a time-resolved evidence signal before the full EEG epoch is available?
-- Can classifier scores be calibrated into approximate evidence increments and accumulated across repeated presentations of an object?
-- Can a discrete-time DDM summarize the resulting accumulation using target/non-target drift and a decision boundary?
-- How do the resulting sequential decoding curves compare with a conventional LDA evidence stream?
+Use the original dataset documentation for access, citation, and redistribution terms. Check the source and license of the local BCIAUT-P300.pdf before sharing it.
 
-## Dataset and Preprocessing
+## Model and evidence accumulation
 
-The analysis uses the **BCIAUT-P300** dataset. The current implementation described in the technical report uses seven available sessions from participant **SBJ01**, with eight EEG channels and repeated presentations of eight objects.
+The SNN architecture is:
 
-Preprocessing and input representation:
+8 input channels → 64 Adaptive-LIF units → 64 Adaptive-LIF units → leaky-integrator readout
 
-- Sampling frequency: **250 Hz**
-- Fourth-order, zero-phase Butterworth band-pass filter: **0.5–20 Hz**
-- Baseline correction using the **−200 to 0 ms** pre-stimulus interval
-- Post-stimulus analysis window: **0–800 ms**
-- Temporal pooling: four samples per SNN time step
-- SNN input shape: **samples × 50 time steps × 8 channels**
-- Each SNN step represents approximately **16 ms**
+The model uses direct current encoding of scaled EEG signals and is trained with AdamW, a cosine learning-rate schedule, validation-based early stopping, class-weighted binary cross-entropy, input noise, small temporal shifts, gradient clipping, firing-rate regularization, and surrogate gradients.
 
-The report's pre-stimulus leakage check gives an LDA AUC of **0.509 ± 0.016**, close to chance.
+The readout produces a time-resolved evidence trajectory. Scores are calibrated on validation blocks using an equal-variance Gaussian class-conditional approximation to obtain LLR-like evidence increments. These increments are accumulated across object repetitions.
 
-**Dataset access:** Consult the original BCIAUT-P300 data source and its usage terms before downloading or redistributing the data. A paper describing the dataset is referenced in the `PApers/` directory. The repository also contains a local PDF named `BCIAUT-P300.pdf`; check its source and licensing before redistribution.
+The DDM models each repetition as one accumulation step. Its decision time is measured in repetitions, not human reaction time; trial-level button-press timestamps are not available in this analysis.
 
-## Model
+The current preprocessing uses zero-phase filtering, so the full pipeline is not strictly causal and is not yet suitable for claims of real-time latency.
 
-The SNN uses direct current encoding of the scaled EEG waveform and the following architecture:
-
-`8 input channels → 64 Adaptive-LIF units → 64 Adaptive-LIF units → leaky-integrator readout`
-
-The readout produces a temporal evidence trajectory (E(t)). The model is trained with AdamW, a cosine learning-rate schedule, early stopping based on validation ROC-AUC, class-weighted binary cross-entropy, input noise, small temporal shifts, gradient clipping, and firing-rate regularization. Surrogate gradients are used to train the spiking layers.
-
-The time-resolved evidence is computed from the observed temporal prefix so that an earlier evidence value does not use later post-stimulus samples. The current offline preprocessing uses zero-phase filtering, however, so the full pipeline is **not strictly causal for real-time deployment**.
-
-## Evidence Calibration and DDM
-
-SNN scores are calibrated on validation blocks using an equal-variance Gaussian class-conditional approximation to obtain LLR-like evidence increments. The increments are accumulated across repetitions of each object.
-
-The DDM treats each object repetition as one discrete accumulation step, with class-dependent drift and absorbing decision boundaries. Its decision time is expressed in **repetitions**, not participant reaction time. The data used in this analysis do not provide trial-level button-press timestamps.
-
-## Current Results
+## Results
 
 ### Single-trial discrimination
 
 | Metric | Adaptive-LIF SNN | Shrinkage LDA |
-|---|---:|---:|
+| --- | ---: | ---: |
 | Mean held-out ROC-AUC | 0.663 ± 0.022 | 0.781 ± 0.048 |
 
-The matched LDA baseline outperformed the SNN in all seven held-out sessions; the report gives a paired Wilcoxon signed-rank test of **p = 0.0156**.
+LDA outperformed the SNN in all seven held-out sessions. The report gives a paired Wilcoxon signed-rank test of p = 0.0156.
 
 ### Temporal evidence
 
-- Peak mean temporal evidence AUC: **0.657 at approximately 568 ms**
-- Median neural evidence onset latency: **approximately 472 ms**
-- Mean evidence AUC reaches 90% of its above-chance peak at approximately **536 ms**
+- Peak mean temporal evidence AUC: 0.657 at approximately 568 ms
+- Median evidence onset latency: approximately 472 ms
+- Time to reach 90% of the above-chance peak: approximately 536 ms
 
-These are neural-evidence timing measures, not behavioral reaction times.
+These values describe neural-evidence timing, not behavioral reaction times.
 
-### Eight-way speller accuracy across repetitions
+### Eight-choice speller accuracy
 
 | Repetitions | SNN | LDA |
-|---:|---:|---:|
+| ---: | ---: | ---: |
 | 1 | 22.6% | 40.3% |
 | 2 | 30.5% | 52.0% |
 | 3 | 35.2% | 59.1% |
@@ -86,90 +71,80 @@ These are neural-evidence timing measures, not behavioral reaction times.
 | 15 | 91.7% | 100.0% |
 | 18 | 100.0% | 100.0% |
 
-Chance level for eight choices is **12.5%**. In this run, LDA provides stronger speller-level decoding at the same number of repetitions.
+Chance level for eight choices is 12.5%. LDA provides stronger decoding at the same number of repetitions in this experiment.
 
 ### Preliminary DDM estimates
 
-At the reference threshold (Theta = 3), the current report gives mean target drift of **0.289 ± 0.103**, mean non-target drift of **−0.251 ± 0.053**, a fitted boundary of **5.10**, and a model-derived decision time of **7.82 repetitions**.
+At a reference threshold of 3, the report gives mean target drift of 0.289 ± 0.103, mean non-target drift of −0.251 ± 0.053, a fitted boundary of 5.10, and a model-derived decision time of 7.82 repetitions.
 
-**Important:** These DDM numbers are labelled preliminary in the technical report. The current notebook can include training-session records with missing held-out scores filled with zero evidence. Rebuild the DDM trial table using held-out test epochs only and rerun the fits before treating these estimates as final results or publication-ready findings.
+These estimates are preliminary. The current DDM table may include training-session records with missing held-out scores filled with zero evidence. Rebuild the table using held-out test epochs only and rerun the fits before treating these values as final or publication-ready.
 
-## Repository Structure
+## Repository contents
 
-```text
-IITKGP_IEEE_BCI/
-├── Analysis/                  # Linked Git submodule; see note below
-├── BCIAUT-P300.pdf             # Dataset-related PDF in repository
-├── PApers/
-│   ├── Abhishek_IEEE_EMBS.pdf
-│   └── To Read/                 # Background papers and reading material
-└── results_snn_ddm/
-    ├── ddm_fits_per_session.csv
-    ├── single_trial_auc.csv
-    ├── speller_accuracy_vs_repetitions.csv
-    ├── speed_accuracy_sweep.csv
-    ├── scores_and_evidence.npz
-    ├── snn_fold*_seed0.pt
-    ├── fig1_single_trial_and_temporal.png
-    ├── fig2_speller_accuracy.png
-    └── fig3_ddm.png
-```
+- `Analysis/`: linked Git submodule containing the analysis code
+- `BCIAUT-P300.pdf`: dataset-related PDF
+- `PApers/`: project paper and background reading
+- `results_snn_ddm/`: reported metrics, model checkpoints, evidence arrays, and figures
 
-The `Analysis/` entry is currently a **Git submodule pointer**, not a regular directory stored in this repository. To retrieve it when cloning, initialize submodules:
+Key result files:
+
+- `ddm_fits_per_session.csv`
+- `single_trial_auc.csv`
+- `speller_accuracy_vs_repetitions.csv`
+- `speed_accuracy_sweep.csv`
+- `scores_and_evidence.npz`
+- `snn_fold*_seed0.pt`
+
+Figures:
+
+- [Single-trial and temporal evidence](results_snn_ddm/fig1_single_trial_and_temporal.png)
+- [Speller accuracy across repetitions](results_snn_ddm/fig2_speller_accuracy.png)
+- [DDM results (preliminary)](results_snn_ddm/fig3_ddm.png)
+
+## Clone the repository
+
+Clone the repository and its submodule:
 
 ```bash
 git clone --recurse-submodules https://github.com/Abhikumar199/IITKGP_IEEE_BCI.git
 ```
 
-Or, after cloning:
+If you already cloned the repository, initialize the submodule with:
 
 ```bash
 git submodule update --init --recursive
 ```
 
-If the submodule is private or unavailable to you, the linked content may not clone. The results folder includes selected outputs and figures; the current root tree does not itself show a top-level training notebook or environment specification.
+The Analysis folder is currently a submodule pointer, not a regular folder tracked directly in this repository. Access to the linked repository may be required.
 
-## Reproducing the Analysis
+## Reproducing the analysis
 
-The tracked outputs support inspection of the current reported results. To reproduce the full training and evaluation pipeline:
+1. Clone the repository with its submodule.
+2. Obtain the BCIAUT-P300 dataset from its official source and arrange the files as expected by the analysis code.
+3. Install the dependencies used by the notebook or scripts. A root-level requirements file is not currently documented; check the analysis code for imports and environment details.
+4. Run preprocessing and leave-one-session-out evaluation.
+5. Reproduce the LDA baseline and temporal evidence analysis.
+6. Rebuild the DDM table using held-out test epochs only, then refit the DDM.
+7. Evaluate multiple random seeds. The current reported SNN result uses one seed.
 
-1. Clone the repository, including the `Analysis/` submodule.
-2. Obtain the BCIAUT-P300 data from its official source and arrange it as expected by the analysis code.
-3. Install the dependencies used by the notebook or scripts. No verified `requirements.txt` is currently documented at the repository root, so use the imports and environment notes in `Analysis/` to build a matching environment.
-4. Run the preprocessing and leave-one-session-out experiments.
-5. Reproduce the matched LDA baseline and the temporal evidence analysis.
-6. Restrict the DDM construction stage to held-out test epochs only, then refit the DDM.
-7. Repeat the outer evaluation with multiple random seeds. The report notes that its current executed SNN result used one seed; at least three seeds are planned for a more robust analysis.
-
-The exact commands depend on the contents of the linked `Analysis/` submodule and the local dataset layout.
+Exact execution commands depend on the code in the Analysis submodule and the local dataset layout.
 
 ## Limitations
 
-- **Single participant in the current implementation:** results use seven sessions from SBJ01; cross-subject generalization has not been established.
-- **SNN below LDA:** the current SNN is not the best-performing classifier in this experiment.
-- **Preliminary DDM table:** the zero-filled non-held-out-score issue must be fixed and the analysis rerun.
-- **Single random seed:** robustness across seeds remains to be established.
-- **Offline filtering:** zero-phase filtering is not strictly causal and limits claims about online latency.
-- **Approximate calibration:** the LLR conversion assumes equal-variance Gaussian score distributions.
-- **No behavioral reaction times:** DDM decision times are in repetition units and should not be described as human reaction times.
+- Results currently cover seven sessions from one participant; cross-subject generalization has not been established.
+- The SNN performs below the LDA baseline in the reported experiment.
+- DDM estimates require recomputation using held-out test epochs only.
+- Results from a single random seed do not establish robustness.
+- Zero-phase filtering is non-causal.
+- LLR calibration relies on an equal-variance Gaussian approximation.
+- DDM decision time is measured in repetitions, not human reaction time.
 
-## Figures
+## References and citation
 
-The repository contains the currently reported result plots:
+The `PApers/To Read/` directory contains background papers. When using the dataset or discussing prior methods, cite the original publications and follow the dataset's terms of use.
 
-- [Single-trial and temporal evidence results](results_snn_ddm/fig1_single_trial_and_temporal.png)
-- [Speller accuracy across repetitions](results_snn_ddm/fig2_speller_accuracy.png)
-- [DDM results](results_snn_ddm/fig3_ddm.png) — preliminary; see the caveat above.
-
-## References and Data
-
-- **Dataset:** BCIAUT-P300. Please consult the original dataset documentation for citation and terms of use.
-- Papers collected for project reading are in `PApers/To Read/`. Cite the original publications rather than the local PDF copies when writing up the research.
-
-## Citation
-
-If you use or refer to this repository, cite the project repository and the associated technical report where appropriate. A formal publication citation should only be added after publication details are available.
+If you use this repository, cite the project repository and associated technical report where appropriate. Add a formal publication citation only when publication details are available.
 
 ## Acknowledgement
 
-This repository documents a research-stage implementation connecting spiking neural temporal representations with sequential decision modelling for P300 BCI analysis. Results and interpretations should be considered in light of the limitations stated above.
+This repository documents a research-stage investigation of spiking neural representations and sequential decision modeling for P300 BCI analysis. Interpret the results in light of the limitations above.
