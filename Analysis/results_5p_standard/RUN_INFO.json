@@ -1,0 +1,83 @@
+{
+  "data_kind": "real",
+  "profile": "standard",
+  "data_root": "..\\Dataset",
+  "subjects": [
+    "SBJ01",
+    "SBJ02",
+    "SBJ03",
+    "SBJ04",
+    "SBJ05"
+  ],
+  "sessions": {
+    "SBJ01": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07"
+    ],
+    "SBJ02": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07"
+    ],
+    "SBJ03": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07"
+    ],
+    "SBJ04": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07"
+    ],
+    "SBJ05": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07"
+    ]
+  },
+  "n_folds": 7,
+  "seeds_main": 1,
+  "seeds_ablation": 1,
+  "device": "cuda",
+  "settings": {
+    "H1": 64,
+    "H2": 64,
+    "BATCH": 256,
+    "MAX_EPOCHS": 30,
+    "PATIENCE": 6,
+    "N_SEEDS_MAIN": 1,
+    "N_SEEDS_ABL": 1,
+    "MC_PASSES": 8,
+    "RUN_ABLATIONS": false
+  },
+  "skipped": {},
+  "theta_ref": 3.0,
+  "reps_full": 5,
+  "reps_reported": [
+    1,
+    2,
+    3,
+    5
+  ]
+}

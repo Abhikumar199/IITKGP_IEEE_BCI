@@ -1,0 +1,7 @@
+,LDA,ANN (temporal CNN),LIF SNN,Adaptive-LIF (base),Adaptive-LIF (proposed)
+SBJ01,"0.722 [0.646, 0.794]","0.705 [0.603, 0.797]","0.132 [0.094, 0.170]","0.238 [0.177, 0.322]","0.399 [0.359, 0.435]"
+SBJ02,"nan [nan, nan]","nan [nan, nan]","nan [nan, nan]","nan [nan, nan]","nan [nan, nan]"
+SBJ03,"nan [nan, nan]","nan [nan, nan]","nan [nan, nan]","nan [nan, nan]","nan [nan, nan]"
+SBJ04,"nan [nan, nan]","nan [nan, nan]","nan [nan, nan]","nan [nan, nan]","nan [nan, nan]"
+SBJ05,"nan [nan, nan]","nan [nan, nan]","nan [nan, nan]","nan [nan, nan]","nan [nan, nan]"
+Pooled,"0.722 [0.646, 0.794]","0.705 [0.603, 0.797]","0.132 [0.094, 0.170]","0.238 [0.177, 0.322]","0.399 [0.359, 0.435]"

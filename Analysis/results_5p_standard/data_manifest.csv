@@ -1,0 +1,211 @@
+subject,session,part,usable,n_epochs,n_targets,n_blocks,block_source
+SBJ01,S01,Train,True,1600,200,20,default size
+SBJ01,S01,Test,True,2400,300,50,default size
+SBJ01,S02,Train,True,1600,200,20,default size
+SBJ01,S02,Test,True,2800,350,41,inferred from target changes
+SBJ01,S03,Train,True,1600,200,20,default size
+SBJ01,S03,Test,True,2800,350,43,inferred from target changes
+SBJ01,S04,Train,True,1600,200,20,default size
+SBJ01,S04,Test,True,3600,450,46,inferred from target changes
+SBJ01,S05,Train,True,1600,200,20,default size
+SBJ01,S05,Test,True,2000,250,48,inferred from target changes
+SBJ01,S06,Train,True,1600,200,20,default size
+SBJ01,S06,Test,True,2800,350,41,inferred from target changes
+SBJ01,S07,Train,True,1600,200,20,default size
+SBJ01,S07,Test,True,2800,350,43,inferred from target changes
+SBJ02,S01,Train,True,1600,200,20,default size
+SBJ02,S01,Test,True,3600,450,43,inferred from target changes
+SBJ02,S02,Train,True,1600,200,20,default size
+SBJ02,S02,Test,True,3200,400,45,inferred from target changes
+SBJ02,S03,Train,True,1600,200,20,default size
+SBJ02,S03,Test,True,2000,250,45,inferred from target changes
+SBJ02,S04,Train,True,1600,200,20,default size
+SBJ02,S04,Test,True,2800,350,42,inferred from target changes
+SBJ02,S05,Train,True,1600,200,20,default size
+SBJ02,S05,Test,True,2000,250,43,inferred from target changes
+SBJ02,S06,Train,True,1600,200,20,default size
+SBJ02,S06,Test,True,2400,300,50,default size
+SBJ02,S07,Train,True,1600,200,20,default size
+SBJ02,S07,Test,True,2000,250,41,inferred from target changes
+SBJ03,S01,Train,True,1600,200,20,default size
+SBJ03,S01,Test,True,2400,300,50,default size
+SBJ03,S02,Train,True,1600,200,20,default size
+SBJ03,S02,Test,True,2400,300,50,default size
+SBJ03,S03,Train,True,1600,200,20,default size
+SBJ03,S03,Test,True,2800,350,46,inferred from target changes
+SBJ03,S04,Train,True,1600,200,20,default size
+SBJ03,S04,Test,True,4000,500,45,inferred from target changes
+SBJ03,S05,Train,True,1600,200,20,default size
+SBJ03,S05,Test,True,4000,500,42,inferred from target changes
+SBJ03,S06,Train,True,1600,200,20,default size
+SBJ03,S06,Test,True,4000,500,44,inferred from target changes
+SBJ03,S07,Train,True,1600,200,20,default size
+SBJ03,S07,Test,True,2000,250,43,inferred from target changes
+SBJ04,S01,Train,True,1600,200,20,default size
+SBJ04,S01,Test,True,2000,250,41,inferred from target changes
+SBJ04,S02,Train,True,1600,200,20,default size
+SBJ04,S02,Test,True,2000,250,46,inferred from target changes
+SBJ04,S03,Train,True,1600,200,20,default size
+SBJ04,S03,Test,True,2800,350,37,inferred from target changes
+SBJ04,S04,Train,True,1600,200,20,default size
+SBJ04,S04,Test,True,2400,300,50,default size
+SBJ04,S05,Train,True,1600,200,20,default size
+SBJ04,S05,Test,True,1600,200,45,inferred from target changes
+SBJ04,S06,Train,True,1600,200,20,default size
+SBJ04,S06,Test,True,4000,500,41,inferred from target changes
+SBJ04,S07,Train,True,1600,200,20,default size
+SBJ04,S07,Test,True,2400,300,50,default size
+SBJ05,S01,Train,True,1600,200,20,default size
+SBJ05,S01,Test,True,3200,400,44,inferred from target changes
+SBJ05,S02,Train,True,1600,200,20,default size
+SBJ05,S02,Test,True,2800,350,45,inferred from target changes
+SBJ05,S03,Train,True,1600,200,20,default size
+SBJ05,S03,Test,True,2800,350,41,inferred from target changes
+SBJ05,S04,Train,True,1600,200,20,default size
+SBJ05,S04,Test,True,4000,500,42,inferred from target changes
+SBJ05,S05,Train,True,1600,200,20,default size
+SBJ05,S05,Test,True,2400,300,50,default size
+SBJ05,S06,Train,True,1600,200,20,default size
+SBJ05,S06,Test,True,2400,300,50,default size
+SBJ05,S07,Train,True,1600,200,20,default size
+SBJ05,S07,Test,True,2800,350,44,inferred from target changes
+SBJ06,S01,Train,True,1600,200,20,default size
+SBJ06,S01,Test,True,1600,200,47,inferred from target changes
+SBJ06,S02,Train,True,1600,200,20,default size
+SBJ06,S02,Test,True,2800,350,45,inferred from target changes
+SBJ06,S03,Train,True,1600,200,20,default size
+SBJ06,S03,Test,True,3600,450,44,inferred from target changes
+SBJ06,S04,Train,True,1600,200,20,default size
+SBJ06,S04,Test,True,2800,350,40,inferred from target changes
+SBJ06,S05,Train,True,1600,200,20,default size
+SBJ06,S05,Test,True,2800,350,43,inferred from target changes
+SBJ06,S06,Train,True,1600,200,20,default size
+SBJ06,S06,Test,True,2800,350,45,inferred from target changes
+SBJ06,S07,Train,True,1600,200,20,default size
+SBJ06,S07,Test,True,4000,500,47,inferred from target changes
+SBJ07,S01,Train,True,1600,200,20,default size
+SBJ07,S01,Test,True,3600,450,44,inferred from target changes
+SBJ07,S02,Train,True,1600,200,20,default size
+SBJ07,S02,Test,True,2000,250,45,inferred from target changes
+SBJ07,S03,Train,True,1600,200,20,default size
+SBJ07,S03,Test,True,4000,500,46,inferred from target changes
+SBJ07,S04,Train,True,1600,200,20,default size
+SBJ07,S04,Test,True,4000,500,44,inferred from target changes
+SBJ07,S05,Train,True,1600,200,20,default size
+SBJ07,S05,Test,True,3600,450,46,inferred from target changes
+SBJ07,S06,Train,True,1600,200,20,default size
+SBJ07,S06,Test,True,2400,300,50,default size
+SBJ07,S07,Train,True,1600,200,20,default size
+SBJ07,S07,Test,True,3600,450,44,inferred from target changes
+SBJ08,S01,Train,True,1600,200,20,default size
+SBJ08,S01,Test,True,3200,400,44,inferred from target changes
+SBJ08,S02,Train,True,1600,200,20,default size
+SBJ08,S02,Test,True,2800,350,42,inferred from target changes
+SBJ08,S03,Train,True,1600,200,20,default size
+SBJ08,S03,Test,True,1600,200,43,inferred from target changes
+SBJ08,S04,Train,True,1600,200,20,default size
+SBJ08,S04,Test,True,2400,300,50,default size
+SBJ08,S05,Train,True,1600,200,20,default size
+SBJ08,S05,Test,True,2400,300,50,default size
+SBJ08,S06,Train,True,1600,200,20,default size
+SBJ08,S06,Test,True,2800,350,45,inferred from target changes
+SBJ08,S07,Train,True,1600,200,20,default size
+SBJ08,S07,Test,True,2400,300,50,default size
+SBJ09,S01,Train,True,1600,200,20,default size
+SBJ09,S01,Test,True,3200,400,47,inferred from target changes
+SBJ09,S02,Train,True,1600,200,20,default size
+SBJ09,S02,Test,True,3200,400,45,inferred from target changes
+SBJ09,S03,Train,True,1600,200,20,default size
+SBJ09,S03,Test,True,3600,450,47,inferred from target changes
+SBJ09,S04,Train,True,1600,200,20,default size
+SBJ09,S04,Test,True,2400,300,50,default size
+SBJ09,S05,Train,True,1600,200,20,default size
+SBJ09,S05,Test,True,4000,500,40,inferred from target changes
+SBJ09,S06,Train,True,1600,200,20,default size
+SBJ09,S06,Test,True,2400,300,50,default size
+SBJ09,S07,Train,True,1600,200,20,default size
+SBJ09,S07,Test,True,2400,300,50,default size
+SBJ10,S01,Train,True,1600,200,20,default size
+SBJ10,S01,Test,True,2000,250,46,inferred from target changes
+SBJ10,S02,Train,True,1600,200,20,default size
+SBJ10,S02,Test,True,2000,250,44,inferred from target changes
+SBJ10,S03,Train,True,1600,200,20,default size
+SBJ10,S03,Test,True,2400,300,50,default size
+SBJ10,S04,Train,True,1600,200,20,default size
+SBJ10,S04,Test,True,2800,350,42,inferred from target changes
+SBJ10,S05,Train,True,1600,200,20,default size
+SBJ10,S05,Test,True,1200,150,44,inferred from target changes
+SBJ10,S06,Train,True,1600,200,20,default size
+SBJ10,S06,Test,True,2000,250,47,inferred from target changes
+SBJ10,S07,Train,True,1600,200,20,default size
+SBJ10,S07,Test,True,3200,400,45,inferred from target changes
+SBJ11,S01,Train,True,1600,200,20,default size
+SBJ11,S01,Test,True,3200,400,43,inferred from target changes
+SBJ11,S02,Train,True,1600,200,20,default size
+SBJ11,S02,Test,True,1600,200,41,inferred from target changes
+SBJ11,S03,Train,True,1600,200,20,default size
+SBJ11,S03,Test,True,3200,400,42,inferred from target changes
+SBJ11,S04,Train,True,1600,200,20,default size
+SBJ11,S04,Test,True,2800,350,46,inferred from target changes
+SBJ11,S05,Train,True,1600,200,20,default size
+SBJ11,S05,Test,True,2400,300,50,default size
+SBJ11,S06,Train,True,1600,200,20,default size
+SBJ11,S06,Test,True,2400,300,50,default size
+SBJ11,S07,Train,True,1600,200,20,default size
+SBJ11,S07,Test,True,2800,350,47,inferred from target changes
+SBJ12,S01,Train,True,1600,200,20,default size
+SBJ12,S01,Test,True,3200,400,42,inferred from target changes
+SBJ12,S02,Train,True,1600,200,20,default size
+SBJ12,S02,Test,True,3600,450,44,inferred from target changes
+SBJ12,S03,Train,True,1600,200,20,default size
+SBJ12,S03,Test,True,2000,250,44,inferred from target changes
+SBJ12,S04,Train,True,1600,200,20,default size
+SBJ12,S04,Test,True,2400,300,50,default size
+SBJ12,S05,Train,True,1600,200,20,default size
+SBJ12,S05,Test,True,2400,300,50,default size
+SBJ12,S06,Train,True,1600,200,20,default size
+SBJ12,S06,Test,True,2400,300,50,default size
+SBJ12,S07,Train,True,1600,200,20,default size
+SBJ12,S07,Test,True,2400,300,50,default size
+SBJ13,S01,Train,True,1600,200,20,default size
+SBJ13,S01,Test,True,3600,450,40,inferred from target changes
+SBJ13,S02,Train,True,1600,200,20,default size
+SBJ13,S02,Test,True,3200,400,46,inferred from target changes
+SBJ13,S03,Train,True,1600,200,20,default size
+SBJ13,S03,Test,True,3200,400,46,inferred from target changes
+SBJ13,S04,Train,True,1600,200,20,default size
+SBJ13,S04,Test,True,3200,400,43,inferred from target changes
+SBJ13,S05,Train,True,1600,200,20,default size
+SBJ13,S05,Test,True,2400,300,50,default size
+SBJ13,S06,Train,True,1600,200,20,default size
+SBJ13,S06,Test,True,2400,300,50,default size
+SBJ13,S07,Train,True,1600,200,20,default size
+SBJ13,S07,Test,True,4000,500,47,inferred from target changes
+SBJ14,S01,Train,True,1600,200,20,default size
+SBJ14,S01,Test,True,4000,500,44,inferred from target changes
+SBJ14,S02,Train,True,1600,200,20,default size
+SBJ14,S02,Test,True,2400,300,50,default size
+SBJ14,S03,Train,True,1600,200,20,default size
+SBJ14,S03,Test,True,2800,350,43,inferred from target changes
+SBJ14,S04,Train,True,1600,200,20,default size
+SBJ14,S04,Test,True,4000,500,44,inferred from target changes
+SBJ14,S05,Train,True,1600,200,20,default size
+SBJ14,S05,Test,True,4000,500,45,inferred from target changes
+SBJ14,S06,Train,True,1600,200,20,default size
+SBJ14,S06,Test,True,2400,300,50,default size
+SBJ14,S07,Train,True,1600,200,20,default size
+SBJ14,S07,Test,True,3600,450,44,inferred from target changes
+SBJ15,S01,Train,True,1600,200,20,default size
+SBJ15,S01,Test,True,2400,300,50,default size
+SBJ15,S02,Train,True,1600,200,20,default size
+SBJ15,S02,Test,True,2400,300,50,default size
+SBJ15,S03,Train,True,1600,200,20,default size
+SBJ15,S03,Test,True,4000,500,41,inferred from target changes
+SBJ15,S04,Train,True,1600,200,20,default size
+SBJ15,S04,Test,True,3600,450,46,inferred from target changes
+SBJ15,S05,Train,True,1600,200,20,default size
+SBJ15,S05,Test,True,3600,450,45,inferred from target changes
+SBJ15,S06,Train,True,1600,200,20,default size
+SBJ15,S06,Test,True,2400,300,50,default size
+SBJ15,S07,Train,True,1600,200,20,default size
+SBJ15,S07,Test,True,3200,400,45,inferred from target changes

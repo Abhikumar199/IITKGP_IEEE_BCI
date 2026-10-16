@@ -1,0 +1,4 @@
+variant,params,train_s_per_job
+LIF SNN,4980,61.11694911548069
+Adaptive-LIF (base),5108,195.09822879518782
+Adaptive-LIF (proposed),6487,260.4870050634657
